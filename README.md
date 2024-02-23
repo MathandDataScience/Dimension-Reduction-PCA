@@ -37,6 +37,7 @@ Archive(HLA) this database holds the collection of the raw fits data from the Hu
  A few important mathematical techniques need to be discussed in depth, this includes PCA, eigen decomposition, Gram-Schmidt and QR factorization. Along with these mathematical techniques the nature of the sensor and human eye needs to be discussed. As mentioned in the introduction principal component analysis (PCA) serves as a method for understanding trends in data and can be used to represent the data in an orthogonal basis. It is also an important technique used for dimension reduction.[2] Conventionally PCA is preformed but finding the covariance matrix of the data $\sum \in \mathbb{R}^{MxM} $this is found by multiplying the data $A\in \mathbb{R}^{MxN}$ with the data transported $A^T\in \mathbb{R}^{NxM}$.
  
 $$\Sigma = AA^T$$
+
 This outer product forms the covariance matrix 
 
 $$ \Sigma  = \begin{bmatrix}
@@ -57,9 +58,11 @@ theses eigenvectors form a new ortho basis sometimes called the “variable spac
 
 Another factoring technique is $QR$ this allow for a matrix to be factored into a 
 orthonormal matrix $Q$ and $R$ is a right triangular matrix.[3]
+
 $$ A = QR$$
 
 $Q$ is found using a process called Gram-Schmidt. this is calculated by working with the columns of a matrix for example $A$. 
+
 $$ A  = \begin{bmatrix}
 a_1 | & a_2 |& ... & | a_n 
 \end{bmatrix}$$
@@ -68,10 +71,14 @@ from here the these columns are normalized by setting $u_1 = a_1$  and then norm
 
 $$e_1 = \frac {u_1}{||u_1||} $$
 
-for $u_2$ we have subtract the project $a_2$ on to $a_1$ this results in   
+for $u_2$ we have subtract the project $a_2$ on to $a_1$ this results in  
+
 $$u_2  =  a_2 - proj_{u_1} a_2 $$
+
 and 
+
 $$e_2 = \frac {u_2}{||u_2||} $$
+
 this is subtract of projection process is used for each follow column. this can be written as 
 
 $$ u_n = a_n - \sum_{i=1}^{n-1} proj_{u_i} a_n $$
