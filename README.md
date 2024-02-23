@@ -121,4 +121,66 @@ $A_k\in \mathbb{R}^{2722500x6}$ is collapsed down by adding all the colunms toge
 ### Results
 When preforming the PCA due to the nature of the sensor the data is skewed see Figure 1. The data outside the desired values were zeros out before the PCA is performed. As described above PCA was preformed on the data and the eigenvalues were plotted on a scree plot shown in Figure 2. The total amount of data for the first PC was calculated and found to be $83.1 \% $ and the first three PC's accounted for $95.3 \% $
 After mapping back to the original space a histogram plot of the data reveals there are negative values for each PC. See figure 3. To scale the data and remove negative values the date is squared. Due to the nature of the human eye the natural logarithm is applied. The Data is then normalized. see Figure 1. To build a colored photo the first three principal components are mapped back original space and the scaling is applied. An array of zeros is set up of the original size with 3 channels blue green and red. $A_1$ is assigned to the green channel $A_2$ to the blue channel and $A_3$ to red channel. See figure 4. The color process was also performed on $A_4$, $A_5$, $A_6$.see Figure 5. the last three $A_k$ shows the data that is most related. Where the first three shows the data that has the most variance 
+<p align="center">
+ <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/PC1.png" width="50%" height="50%">
+</p>
+<p align="center">
+ <em>Figure 1: WFPC2 bubble nebula: Image created by PC1</em>
+</p>
+
+<p align="center">
+ <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/screeplot.png" width="50%" height="50%">
+</p>
+<p align="center">
+ <em>Figure 2: Scree plot of the eigenvalues</em>
+</p>
+
+<p align="center">
+ <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/PC1-.png" width="50%" height="50%">
+</p>
+<p align="center">
+ <em>Figure 3: Histogram of the mapped back data of PC1</em>
+</p>
+
+<p align="center">
+ <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/PC1-3.png" width="50%" height="50%">
+</p>
+<p align="center">
+ <em>Figure 4: WFPC2 bubble nebula: Image created by PC1-3</em>
+</p>
+
+<p align="center">
+ <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/PC4-6.png" width="50%" height="50%">
+</p>
+<p align="center">
+ <em>Figure 5: WFPC2 bubble nebula: Image created by PC4-6</em>
+</p>
+
+
+### Conclusion
+
+In summary when working with large sample size data set and PCA is believed to offer some insight into the data it may be helpful to use a QR factorization approach to PCA. At a minimum this will cut down on computation time.[3] From our data set we were able to maintain  83.1 %  of the information in just one photo graph using PCA. When working with 3 channels we can maintain  95.3 %  of the information. Lastly, I would like to express sincere gratitude to my project supervisors, Dr. Seth Dutter and Dr.Keith Wojciechowski. 
+
+
+### References
+
+[1] Gonzalez, Rafael C., Woods, Richard E. (2008).Digitalimageprocessing (3rd d.). Pren-
+tice Hall
+
+[2] Abdi, H., and Williams, L. J. (2010). Principal component analysis. Wiley Inter-
+disciplinary Reviews. Computational Statistics , 2(4), 433–459. [online] Available at:
+https://doi.org/10.1002/wics.101
+
+[3] Sharma, A., Paliwal, K.K., Imoto, S. (2013).,P rincipalcomponentanalysisusingQRdecomposition.
+Int Journal of Machine Learning Cybernetics 4, 679–683. [online] Available at:
+https://doi.org/10.1007/s13042-012-0131-7
+
+[4] hst 07515 01 wfpc2 files (2023). [online] Available at: https://hla.stsci.edu/ [Ac- cessed
+20 May 2023].
+
+[5] Kenneth R.Spring, T. J. Fellers, M. W. Davidson, HumanV isionandColorP erception.
+[online] Available at: https://www.olympus-lifescience.com/en/microscope-
+resource/primer/lightandcolor/humanvisionintro/
+
+
 
