@@ -159,7 +159,7 @@ After mapping back to the original space a histogram plot of the data reveals th
 
 ### Conclusion
 
-In summary when working with large sample size data set and PCA is believed to offer some insight into the data it may be helpful to use a QR factorization approach to PCA. At a minimum this will cut down on computation time.[3] From our data set we were able to maintain  83.1 %  of the information in just one photo graph using PCA. When working with 3 channels we can maintain  95.3 %  of the information. Lastly, I would like to express sincere gratitude to my project supervisors, Dr. Seth Dutter and Dr.Keith Wojciechowski. 
+In summary when working with large sample size data set PCA is believed to offer some insight into the data and it may be helpful to use a QR factorization approach to PCA. At a minimum this will cut down on computation time.[3] From our data set we were able to maintain  83.1 %  of the information in just one B+W photo using PCA. When working with 3 channels we can maintain  95.3 %  of the information. Lastly, I would like to express sincere gratitude to my project supervisors, Dr. Seth Dutter and Dr.Keith Wojciechowski. 
 
 
 ### References
