@@ -22,19 +22,19 @@ of similar items or features. when working with large dimensional data these sca
 and heatmaps become hard to read or understand the treads of the data. Along with this
 fact, the key factor that these visualization techniques leave out is how much each dimension
 influences the outcome of the data. This can be understood through Principal Component
-Analysis or PCA and a scree plot. PCA works by identifying the directions in the “vari-
-able space” that account for the most variance in the date (i.e. principal components).[1]
+Analysis (PCA) and a scree plot. PCA works by identifying the directions in the “vari-
+able space” that account for the most variance in the data (i.e. principal components).[1]
 Understanding this will allow the user to determine what dimensions matter the most and
 reduce or remove the dimensions that don’t contribute to the data substantially. Using the
-principal components that contribute the most, allows for the projected of the data onto
+principal components that contribute the most, allows for the projection of the data onto
 a lower-dimensional space maintaining the majority of the data’s features. The data more
 easily be plotted to understand the data further. The inter-working and mathematics of
 this will be discussed later. The problem at hand utilizes PCA in a practical way to reduce
 six grayscale images into one color image. The data utilized come from the Hubble Legacy
-Archive(HLA) this database holds the collection of the raw fits data from the Hubble Space Telescope (HST). [4]
+Archive(HLA) this database holds the collection of the raw fits data from the Hubble Space Telescope (HST) [4].
 
 ### Background
- A few important mathematical techniques need to be discussed in depth, this includes PCA, eigen decomposition, Gram-Schmidt and QR factorization. Along with these mathematical techniques the nature of the sensor and human eye needs to be discussed. As mentioned in the introduction principal component analysis (PCA) serves as a method for understanding trends in data and can be used to represent the data in an orthogonal basis. It is also an important technique used for dimension reduction.[2] Conventionally PCA is preformed but finding the covariance matrix of the data $\Sigma \in \mathbb{R}^{MxM}$ this is found by multiplying the data $A\in \mathbb{R}^{MxN}$ with the data transported $A^T\in \mathbb{R}^{NxM}$.
+ A few important mathematical techniques need to be discussed in depth, this includes PCA, eigen decomposition, Gram-Schmidt and QR factorization. Along with these mathematical techniques the nature of the sensor and human eye needs to be discussed. As mentioned in the introduction principal component analysis (PCA) serves as a method for understanding trends in data and can be used to represent the data in an orthogonal basis. It is also an important technique used for dimension reduction.[2] Conventionally PCA is preformed by finding the covariance matrix of the data $\Sigma \in \mathbb{R}^{MxM}$ this is found by multiplying the data $A\in \mathbb{R}^{MxN}$ with the data transported $A^T\in \mathbb{R}^{NxM}$.
  
 $$\Sigma = AA^T$$
 
@@ -46,15 +46,15 @@ var(x_1) & ----- & cov(x_m,x_1) \\
 cov(x_m,x_1) & ----- & var(x_n)
 \end{bmatrix}$$
 
-The covariance matrix gives a measure of the variance between all variables in the data. From this transformation a basis can be found this is done through eigen decomposition this give the eigenvectors and eigenvalues, which are the root of the principal components. Given a  square matrix $\Sigma$ of $A\in \mathbb{R}^{MxN}$ which has $\leq M$ linear independent eigenvectors, due the data $A$ the number of independent eigenvectors is $\leq N$, we can then factor the matrix $\Sigma$ as 
+The covariance matrix gives a measure of the variance between all variables in the data. From this transformation a basis can be found this is done through eigen decomposition this give the eigenvectors and eigenvalues. Given a square matrix $\Sigma$ of $A\in \mathbb{R}^{MxN}$ which has $\leq M$ linear independent eigenvectors, due the data $A$ the number of independent eigenvectors is $\leq N$, we can then factor the matrix $\Sigma$ as 
 
-$$ \Sigma = V \Lambda V^-1 $$
+$$ \Sigma = V \Lambda V^{-1} $$
 
-where $V$ is a square matrix, whose columns are the eigenvectors of $\Lambda$ and is a matrix with the eigenvalues along the diagonal.[3] The largest eigenvalues and its related eigenvector is principal components one, the descending eigenvalues and its related eigenvector are the remaining principal components. As a special case, for every n × n real symmetric matrix, the decomposed matrix can be written as 
+where $V$ is a square matrix, whose columns are the eigenvectors of A and $\Lambda$ is a diagonal matrix with the eigenvalues along the diagonal.[3] The largest eigenvalues and its related eigenvector is principal components one, the descending eigenvalues and its related eigenvector are the remaining principal components. As a special case, for every n × n real symmetric matrix, the decomposed matrix can be written as 
 
 $$ \Sigma = V \Lambda V^T $$
 
-theses eigenvectors form a new ortho basis sometimes called the “variable space”
+theses eigenvectors form a new orthogonal basis sometimes called the “variable space”
 
 Another factoring technique is $QR$ this allow for a matrix to be factored into a 
 orthonormal matrix $Q$ and $R$ is a right triangular matrix.[3]
@@ -102,24 +102,24 @@ Lastly, there are some scaling factors to keep in mind when working with images 
 The collection of data used come from the Hubble Legacy Archive(HLA) the exact files are from the HST  07515-01-wfpc2.[4] This included the files using the following filters F487N, F502N, F547M, F656N, F658N, and F673N. 
 this data is from NGC 7635 or more commonly known as the bubble nebula.[4] the problem arises when trying to combine this data into a single image of color or gray scale. For color this a six to three dimension reduction and for gray scale this is a six to one reduction. The method chosen to reduce these dimensions was principal component analysis (PCA). Due to the nature of the image once the principal component's (PC's) are calculated the data cant be plotted in the “variable space” instead the PC must be mapped back to the original space and collapsed down into once images for each PC. To preform the PCA the data was reading using the astropy library for python. The data for each filter was then flatted into a vector $V_n\in \mathbb{R}^{2722500x6}$ these were then stacked forming at matrix $A\in \mathbb{R}^{2722500x6}$. When calculating the covariance matrix, a matrix of 2722500 by 2722500 would be formed. In order to calculate this by taking $AA^T$ the computer would utilize 53.9 TB of memory. This is not a feasible calculation for a standard computer, so another method was derived. Using QR factorization on the data $A$ this results in a  $Q\in \mathbb{R}^{2722500x6}$ and a $R\in \mathbb{R}^{6x6}$ using this we find $AA^T$
 
-$$AA^T = QRQ^TR^T$$
+$$A^TA = R^TQ^TQR$$
 
-$$AA^T \approx RR^T$$
+$$A^TA \approx R^TR$$
 
-this come from the fact that $QQ^T$ is approximately the identity matrix. The calculation of $RR^T$ is a feasible calculation for a standard computer as this returns a six by six matrix. From here eigen-decomposition was preformed due to the fact this was a symmetric matrix, the decomposed matrix can be calculated as 
+this come from the fact that $QQ^T$ is the identity matrix. The calculation of $RR^T$ is a feasible calculation for a standard computer as this returns a six by six matrix. From here eigen-decomposition was preformed due to the fact this was a symmetric matrix, the decomposed matrix can be calculated as 
 
-$$ RR^T = V \Lambda V^T $$
+$$ R^TR = V \Lambda V^T $$
 
 this returns six eigenvectors of size six. These value are the thought as weights these weights are mapped back to the original space for all six eigenvectors. 
 
-$$ R_k  = ((V_k \Lambda_k )V_k^T) R^{-T}$$
+$$ R_k  =  R^{-T}((V_k \Lambda_k )V_k^T) $$
 
 $$A_k = QR_k$$
 
 $A_k\in \mathbb{R}^{2722500x6}$ is collapsed down by adding all the colunms together returning a $A_k\in \mathbb{R}^{2722500x1}$ this can then be inflated back into a 1650 by 1650 photo.
 
 ### Results
-When preforming the PCA due to the nature of the sensor the data is skewed see Figure 1. The data outside the desired values were zeros out before the PCA is performed. As described above PCA was preformed on the data and the eigenvalues were plotted on a scree plot shown in Figure 2. The total amount of data for the first PC was calculated and found to be $83.1 \% $ and the first three PC's accounted for $95.3 \% $
+When preforming the PCA due to the nature of the sensor the data is skewed see Figure 1. The data outside the desired values were zeros out before the PCA is performed. As described above PCA was preformed on the data and the eigenvalues were plotted on a scree plot shown in Figure 2. The total amount of data for the first PC was calculated and found to be 83.1 %  and the first three PC's accounted for 95.3 % 
 After mapping back to the original space a histogram plot of the data reveals there are negative values for each PC. See figure 3. To scale the data and remove negative values the date is squared. Due to the nature of the human eye the natural logarithm is applied. The Data is then normalized. see Figure 1. To build a colored photo the first three principal components are mapped back original space and the scaling is applied. An array of zeros is set up of the original size with 3 channels blue green and red. $A_1$ is assigned to the green channel $A_2$ to the blue channel and $A_3$ to red channel. See figure 4. The color process was also performed on $A_4$, $A_5$, $A_6$.see Figure 5. the last three $A_k$ shows the data that is most related. Where the first three shows the data that has the most variance 
 <p align="center">
  <img width="50%" height="50%" src="https://github.com/MathandDataScience/Dimension-Reduction-PCA/blob/main/Pictures/PC1.png" width="50%" height="50%">
