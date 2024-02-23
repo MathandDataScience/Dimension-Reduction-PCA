@@ -34,7 +34,7 @@ six grayscale images into one color image. The data utilized come from the Hubbl
 Archive(HLA) this database holds the collection of the raw fits data from the Hubble Space Telescope (HST). [4]
 
 ### Background
- A few important mathematical techniques need to be discussed in depth, this includes PCA, eigen decomposition, Gram-Schmidt and QR factorization. Along with these mathematical techniques the nature of the sensor and human eye needs to be discussed. As mentioned in the introduction principal component analysis (PCA) serves as a method for understanding trends in data and can be used to represent the data in an orthogonal basis. It is also an important technique used for dimension reduction.[2] Conventionally PCA is preformed but finding the covariance matrix of the data $\sum \in \mathbb{R}^{MxM} $this is found by multiplying the data $A\in \mathbb{R}^{MxN}$ with the data transported $A^T\in \mathbb{R}^{NxM}$.
+ A few important mathematical techniques need to be discussed in depth, this includes PCA, eigen decomposition, Gram-Schmidt and QR factorization. Along with these mathematical techniques the nature of the sensor and human eye needs to be discussed. As mentioned in the introduction principal component analysis (PCA) serves as a method for understanding trends in data and can be used to represent the data in an orthogonal basis. It is also an important technique used for dimension reduction.[2] Conventionally PCA is preformed but finding the covariance matrix of the data $\Sigma \in \mathbb{R}^{MxM}$ this is found by multiplying the data $A\in \mathbb{R}^{MxN}$ with the data transported $A^T\in \mathbb{R}^{NxM}$.
  
 $$\Sigma = AA^T$$
 
